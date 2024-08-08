@@ -4,11 +4,9 @@ class Solution {
         Map<String, List<String>> map= new HashMap<>();
 
         for(String s:strs){
-            int arr[]= new int[26];
+            char arr[]=s.toCharArray();
 
-            for(char c:s.toCharArray()){
-                arr[c-'a']++;
-            }
+           Arrays.sort(arr);
 
             String key= Arrays.toString(arr);
 
