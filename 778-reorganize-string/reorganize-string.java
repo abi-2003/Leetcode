@@ -1,43 +1,36 @@
 class Solution {
-    public String reorganizeString(String s) {
-        int[] cnt = new int[26];
-        int mx = 0;
-        for (char c : s.toCharArray()) {
-            int t = c - 'a';
-            ++cnt[t];
-            mx = Math.max(mx, cnt[t]);
-        }
-        int n = s.length();
-        if (mx > (n + 1) / 2) {
-            return "";
-        }
-        int k = 0;
-        for (int v : cnt) {
-            if (v > 0) {
-                ++k;
+        public String reorganizeString(String S) {
+        int[] hash = new int[26];
+        for (int i = 0; i < S.length(); i++) {
+            hash[S.charAt(i) - 'a']++;
+        } 
+        int max = 0, letter = 0;
+        for (int i = 0; i < hash.length; i++) {
+            if (hash[i] > max) {
+                max = hash[i];
+                letter = i;
             }
         }
-        int[][] m = new int[k][2];
-        k = 0;
-        for (int i = 0; i < 26; ++i) {
-            if (cnt[i] > 0) {
-                m[k++] = new int[] {cnt[i], i};
-            }
+        if (max > (S.length() + 1) / 2) {
+            return ""; 
         }
-        Arrays.sort(m, (a, b) -> b[0] - a[0]);
-        k = 0;
-        StringBuilder ans = new StringBuilder(s);
-        for (int[] e : m) {
-            int v = e[0], i = e[1];
-            while (v > 0) {
-                ans.setCharAt(k, (char) ('a' + i));
-                k += 2;
-                if (k >= n) {
-                    k = 1;
+        char[] res = new char[S.length()];
+        int idx = 0;
+        while (hash[letter] > 0) {
+            res[idx] = (char) (letter + 'a');
+            idx += 2;
+            hash[letter]--;
+        }
+        for (int i = 0; i < hash.length; i++) {
+            while (hash[i] > 0) {
+                if (idx >= res.length) {
+                    idx = 1;
                 }
-                v--;
+                res[idx] = (char) (i + 'a');
+                idx += 2;
+                hash[i]--;
             }
         }
-        return ans.toString();
+        return String.valueOf(res);
     }
 }
