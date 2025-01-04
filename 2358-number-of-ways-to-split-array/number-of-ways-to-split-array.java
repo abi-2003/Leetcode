@@ -1,29 +1,25 @@
 class Solution {
-
     public int waysToSplitArray(int[] nums) {
-        int n = nums.length;
+        
+        int n=nums.length;
        
-        long[] prefSum = new long[n];
-        prefSum[0] = nums[0];
+        int c=0;
+        long sum=0;
+    long lsum=0;
+    long rsum=0;
+     for( int x:nums){
+        sum+=x;
+     }
+     for(int i=0;i<n-1;i++){
 
+        lsum+=nums[i];
+        rsum=sum-lsum;
+         if(lsum>=rsum){
+            c++;
+          }
+     }
+          
         
-        for (int i = 1; i < n; i++) {
-            prefSum[i] = prefSum[i - 1] + nums[i];
-        }
-
-        int count = 0;
-        
-        for (int i = 0; i < n - 1; i++) {
-         
-            long leftSum = prefSum[i];
-           
-            long rightSum = prefSum[n - 1] - prefSum[i];
-
-            if (leftSum >= rightSum) {
-                count++;
-            }
-        }
-
-        return count;
+        return c;
     }
 }
