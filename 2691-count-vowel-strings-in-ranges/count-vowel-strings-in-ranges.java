@@ -1,27 +1,25 @@
 class Solution {
+
+
+
+
+
+     boolean check(String s) {
+        return "aeiou".indexOf(s.charAt(0)) != -1 && "aeiou".indexOf(s.charAt(s.length() - 1)) != -1;
+      }
+
     public int[] vowelStrings(String[] words, int[][] queries) {
-        int n=words.length;
-        int arr[]=new int [n];
-          int num=0;
-        for(String s:words){
-            int len=s.length();
-            int flag=0;
-           
-                if((s.charAt(0)=='a'||s.charAt(0)=='e'||s.charAt(0)=='i'||s.charAt(0)=='o'||s.charAt(0)=='u') &&( s.charAt(len-1)=='a'||s.charAt(len-1)=='e'||s.charAt(len-1)=='i'||s.charAt(len-1)=='o'||s.charAt(len-1)=='u')){
-                    flag=1;
-                
-                }
-            
-                if(flag==0){
-                    arr[num]=0;
-                }
-                else{
-                    arr[num]=1;
-                }
-                num++;
-            
-            
+        int[] n = new int[words.length];
+        int[] ans = new int[queries.length];
+
+        for (int i = 0; i < words.length; i++) {
+            n[i] = check(words[i]) ? 1 : 0;
         }
+
+
+
+    
+            
 
         int q=queries.length;
         int sum=0;
@@ -33,7 +31,7 @@ class Solution {
             int b=queries[k][1];
 
             for(int a=m;a<=b;a++){
-                sum+=arr[a];
+                sum+=n[a];
             }
             res[z++]=sum;
         }
