@@ -11,9 +11,9 @@ char** summaryRanges(int* nums, int numsSize, int* returnSize) {
 
     int start = nums[0];
     for (int i = 1; i <= numsSize; i++) {
-        // If it's the end of array or a non-consecutive number
+        
         if (i == numsSize || nums[i] != nums[i - 1] + 1) {
-            result[*returnSize] = (char*)malloc(BUFFER_SIZE * sizeof(char)); // Increase buffer size
+            result[*returnSize] = (char*)malloc(BUFFER_SIZE * sizeof(char)); 
             
             if (start == nums[i - 1]) {
                 snprintf(result[*returnSize], BUFFER_SIZE, "%d", start);
@@ -22,7 +22,7 @@ char** summaryRanges(int* nums, int numsSize, int* returnSize) {
             }
             
             (*returnSize)++;
-            if (i < numsSize) start = nums[i]; // Update start for next range
+            if (i < numsSize) start = nums[i]; 
         }
     }
 
